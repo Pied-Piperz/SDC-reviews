@@ -36,11 +36,28 @@ server.put('/api/products/:id/review', (req, res) => {
   });
 })
 
+server.delete('/api/products/delete', (req, res) => {
+  Product.deleteMany({})
+    .then(() => {
+      res.status(200).send('Deleted All');
+    })
+    .catch((err) => {
+      res.status(400).send(err);
+    });
+});
+
+server.post('/api/products/post', (req, res) => {
+  Product.create(req.body)
+    .then(() => {
+      res.status(200).send('Successfully posted!');
+    })
+    .catch((err) => {
+      res.status(400).send(err);
+    });
+});
+
+
 server.use(express.static(path.join(__dirname, '../client/dist')));
-
-
-
-
 
 server.listen(port, () => {
   console.log('connected to server and listening on port 3000');
