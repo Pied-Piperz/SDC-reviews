@@ -20,7 +20,7 @@ const createReview = () => {
   review.user = names[Math.floor(Math.random() * names.length)];
   review.text = randomText[Math.floor(Math.random() * randomText.length)];
   review.dateCreated = randomDates[Math.floor(Math.random() * randomText.length)];
-  review.stars = Math.floor(Math.random() * 4) + 1;
+  review.stars = Math.floor(Math.random() * 6);
   review.summary = keyWords[Math.floor(Math.random() * keyWords.length)];
   review.helpfulCount = Math.floor(Math.random() * 15);
 
