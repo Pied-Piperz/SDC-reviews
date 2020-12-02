@@ -40,6 +40,7 @@
     "eslint": "^7.13.0",
     "eslint-config-airbnb": "^18.2.1",
     "eslint-config-hackreactor": "git://github.com/reactorcore/eslint-config-hackreactor",
+    "lorem-ipsum": "^2.0.3",
     "webpack": "^5.4.0",
     "webpack-cli": "^4.2.0"
   }
