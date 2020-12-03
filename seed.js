@@ -28,6 +28,7 @@ var randomDates = [new Date(2018,11,23), new Date(2020, 8, 11), new Date(2020, 6
 const random = (num) => {
   return Math.floor(Math.random() * num);
 }
+
 const getRandomDate = (start, end) => {
   return new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime()));
 }
@@ -44,18 +45,19 @@ const getRandomGame = () => {
 
 const createReview = () => {
   var review = {};
-  review.user = names[Math.floor(Math.random() * names.length)];
-  review.text = randomText[Math.floor(Math.random() * randomText.length)];
-  review.dateCreated = randomDates[Math.floor(Math.random() * randomText.length)];
-  review.stars = Math.floor(Math.random() * 6);
-  review.summary = keyWords[Math.floor(Math.random() * keyWords.length)];
-  review.helpfulCount = Math.floor(Math.random() * 15);
+  review._id = new mongoose.Types.ObjectId();
+  review.user = names[random(names.length)];
+  review.text = lorem.generateParagraphs(1);
+  review.dateCreated = getRandomDate(new Date(2020, 9, 3), new Date());
+  review.stars = random(4) + 1;
+  review.summary = lorem.generateSentences(1);
+  review.helpfulCount = random(15);
 
   review.ratings = {
-    gameplay: Math.floor(Math.random() * 5),
-    sound: Math.floor(Math.random() * 6),
-    graphics: Math.floor(Math.random() * 6),
-    lastingQuality: Math.floor(Math.random() * 6),
+    gameplay: random(4) + 1,
+    sound: random(4) + 1,
+    graphics: random(4) + 1,
+    lastingQuality: random(4) + 1,
     recommended: (Math.random() <= 0.2)
   }
 
@@ -114,6 +116,8 @@ var products = gameNames.map((item) => {
 // potentially:  - just multiply that to create 10 million?
 //               - have it so it will select a random game name and produce random data for that product
 
+
+//
 
 
 products.forEach((product) => {
