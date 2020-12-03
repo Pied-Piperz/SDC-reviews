@@ -2,12 +2,12 @@ version: '3'
 
 services:
   web:
-    build: .
+    image: ahasandic/reviews111
     ports:
       - 3000:3000
     depends_on:
-      - database
-  database:
+      - mongodb
+  mongodb:
     image: mongo:latest
 
 
