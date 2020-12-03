@@ -9,23 +9,9 @@ mongoose.connect('mongodb://localhost/reviews', { useNewUrlParser: true, useUnif
   console.error(err);
 })
 
-const reviewSchema = new mongoose.Schema({
+const productSchema = new mongoose.Schema({
   product: String,
-  reviews: [{
-    user: String,
-    text: String,
-    dateCreated: Date,
-    stars: Number,
-    summary: String,
-    helpfulCount: Number,
-    ratings: {
-      gameplay: Number,
-      sound: Number,
-      graphics: Number,
-      lastingQuality: Number,
-      recommended: Boolean
-    }
-  }],
+  reviews: [{type: mongoose.Schema.ObjectId, ref: 'Reviews'}],
   ratings: {
     gameplay: Number,
     sound: Number,
@@ -35,6 +21,23 @@ const reviewSchema = new mongoose.Schema({
   }
 });
 
-const Product = mongoose.model('Product', reviewSchema);
+const reviewSchema = new mongoose.Schema({
+  user: String,
+  text: String,
+  dateCreated: Date,
+  stars: Number,
+  summary: String,
+  helpfulCount: Number,
+  ratings: {
+    gameplay: Number,
+    sound: Number,
+    graphics: Number,
+    lastingQuality: Number,
+    recommended: Boolean
+  }
+})
 
-module.exports = Product;
+const Product = mongoose.model('Product', productSchema);
+const Reviews = mongoose.model('Reviews', reviewSchema);
+
+module.exports = {Product, Reviews};

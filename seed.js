@@ -24,10 +24,17 @@ var randomText = ['Donec sed pellentesque enim','Aliquam tortor mauris, tempor v
 
 var randomDates = [new Date(2018,11,23), new Date(2020, 8, 11), new Date(2020, 6, 24), new Date(2020,5,25), new Date(2020,5,25),new Date(2020,5,25),new Date(2020,5,25),new Date(2020,8,22),new Date(2020,9,11),new Date(2020,6,26),new Date(2020,4,15),new Date(2020,3,13),new Date(2020,6,4),new Date(2020,7,6)];
 
+
+const random = (num) => {
+  return Math.floor(Math.random() * num);
+}
 const getRandomDate = (start, end) => {
   return new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime()));
 }
 
+const getRandomGame = () => {
+  return gameNames[random(gameNames.length)];
+}
 // will need to change / not use these keywords/randomtext arrays, and replace them with random lorem ipsum or faker library
 // ex. lorem.generateSentences(1); for keywords
 //     lorem.generateParagraphs(1); for text
