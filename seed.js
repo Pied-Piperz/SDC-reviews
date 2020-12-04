@@ -2,10 +2,11 @@ const Product = require('./database/index.js');
 const mongoose =  require('mongoose');
 const LoremIpsum = require('lorem-ipsum').LoremIpsum;
 const fs = require('fs');
+const json = require('big-json');
 
 const lorem = new LoremIpsum({
   sentencesPerParagraph: {
-    max: 3,
+    max: 1,
     min: 1
   },
   wordsPerSentence: {
@@ -117,65 +118,61 @@ var products = gameNames.map((item) => {
 // potentially:  - just multiply that to create 10 million?
 //               - have it so it will select a random game name and produce random data for that product
 
+const productJsonWriteStream = fs.createWriteStream('productData.json');
+const reviewJsonWriteStream = fs.createWriteStream('reviewData.json');
 
 const productsGenerator = function(entries) {
-    let resultsObject = {};
-    resultsObject.productsArray = [];
-    resultsObject.reviewsArray = [];
     for (let i = 0; i < entries; i++) {
       let reviewsTemp = [];
       let numberOfReviews = random(2) + 1;
       for (numberOfReviews; numberOfReviews > 0; numberOfReviews--) {
         let review = createReview();
-        resultsObject.reviewsArray.push(review);
+        reviewJsonWriteStream.write(JSON.stringify(review));
         reviewsTemp.push(review);
       }
       let product = {};
       product.product = getRandomGame();
-      product.ratings = {
-        gameplay: 0,
-        sound: 0,
-        graphics: 0,
-        lastingQuality: 0,
-        recommended: 0
-      }
       product.reviews = [];
       reviewsTemp.forEach((review) => {
         product.reviews.push(review._id);
-        product.ratings.gameplay += review.ratings.gameplay;
-        product.ratings.sound += review.ratings.sound;
-        product.ratings.graphics += review.ratings.graphics;
-        product.ratings.lastingQuality += review.ratings.lastingQuality;
-        if (review.ratings.recommended) {
-          product.ratings.recommended++;
-        };
       })
-      for (let key in product.ratings) {
-        if (key !== 'recommended') {
-          product.ratings[key] = Math.round((product.ratings[key]/reviewsTemp.length) * 10) / 10;
-        }
-      }
-      resultsObject.productsArray.push(product);
+      productJsonWriteStream.write(JSON.stringify(product));
     }
-    return resultsObject;
 }
 
-let data = productsGenerator(500000);
+productsGenerator(10000000);
 
-fs.writeFile('productData.json', JSON.stringify(data.productsArray, null, 2), function(err) {
-  if (err) {
-    console.log(err);
-  } else {
-    console.log('Successfully wrote products file');
-  }
-});
-fs.writeFile('reviewData.json', JSON.stringify(data.reviewsArray, null, 2), function(err) {
-  if (err) {
-    console.log(err);
-  } else {
-    console.log('Successfully wrote reviews file');
-  }
-})
+// const productStringifyStream = json.createStringifyStream({
+//   body: data.productsArray
+// });
+
+// const reviewStringifyStream = json.createStringifyStream({
+//   body: data.reviewsArray
+// });
+
+
+// productStringifyStream.on('data', function(strChunk) {
+//   productJsonWriteStream.write(strChunk);
+// });
+
+// reviewStringifyStream.on('data', function(strChunk) {
+//   reviewJsonWriteStream.write(strChunk);
+// });
+// fs.writeFile('productData.json', JSON.stringify(data.productsArray, null, 2), function(err) {
+//   if (err) {
+//     console.log(err);
+//   } else {
+//     console.log('Successfully wrote products file');
+//   }
+// });
+
+// fs.writeFile('reviewData.json', JSON.stringify(data.reviewsArray, null, 2), function(err) {
+//   if (err) {
+//     console.log(err);
+//   } else {
+//     console.log('Successfully wrote reviews file');
+//   }
+// })
 // products.forEach((product) => {
 //   Product.create(product)
 //   .then(() => {
