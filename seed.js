@@ -21,7 +21,6 @@ var gameNames = ['Madden20', 'Madden21', 'Pokemon Shield', 'Pokemon Sword', 'Jus
 var keyWords = ['Ut sit amet sapien metus', 'Integer eget purus', 'Vivamus ultrices', 'Nullam nulla lectus', 'Praesent gravida', 'Pellentesque molestie mauris non libero', 'Fusce sem lorem', 'Suspendisse a mauris nec libero'];
 
 
-
 var randomText = ['Donec sed pellentesque enim','Aliquam tortor mauris, tempor vel augue ut, convallis placerat sem', 'Nunc quis quam vitae risus placerat bibendum nec vel sapien.', 'Phasellus vitae lacus viverra, hendrerit ante eu, ornare tortor.', 'Mauris gravida malesuada lorem id eleifend.', 'Fusce facilisis est ut tempor elementum.', 'Vestibulum lacinia ex ac leo mollis, sit amet dapibus libero ultrices.', 'Mauris ac semper lectus.'];
 
 var randomDates = [new Date(2018,11,23), new Date(2020, 8, 11), new Date(2020, 6, 24), new Date(2020,5,25), new Date(2020,5,25),new Date(2020,5,25),new Date(2020,5,25),new Date(2020,8,22),new Date(2020,9,11),new Date(2020,6,26),new Date(2020,4,15),new Date(2020,3,13),new Date(2020,6,4),new Date(2020,7,6)];
@@ -38,12 +37,6 @@ const getRandomDate = (start, end) => {
 const getRandomGame = () => {
   return gameNames[random(gameNames.length)];
 }
-// will need to change / not use these keywords/randomtext arrays, and replace them with random lorem ipsum or faker library
-// ex. lorem.generateSentences(1); for keywords
-//     lorem.generateParagraphs(1); for text
-// will also need to change the randomdates, and instead have them be random as far back as 3 months ago
-
-
 
 const createReview = () => {
   var review = {};
@@ -114,10 +107,6 @@ var products = gameNames.map((item) => {
 
 });
 
-// This products function will need to be changed, currently it will only create as many products as there are in the gameNames array.
-// potentially:  - just multiply that to create 10 million?
-//               - have it so it will select a random game name and produce random data for that product
-
 const productJsonWriteStream = fs.createWriteStream('productData.json');
 const reviewJsonWriteStream = fs.createWriteStream('reviewData.json');
 
@@ -142,37 +131,6 @@ const productsGenerator = function(entries) {
 
 productsGenerator(10000000);
 
-// const productStringifyStream = json.createStringifyStream({
-//   body: data.productsArray
-// });
-
-// const reviewStringifyStream = json.createStringifyStream({
-//   body: data.reviewsArray
-// });
-
-
-// productStringifyStream.on('data', function(strChunk) {
-//   productJsonWriteStream.write(strChunk);
-// });
-
-// reviewStringifyStream.on('data', function(strChunk) {
-//   reviewJsonWriteStream.write(strChunk);
-// });
-// fs.writeFile('productData.json', JSON.stringify(data.productsArray, null, 2), function(err) {
-//   if (err) {
-//     console.log(err);
-//   } else {
-//     console.log('Successfully wrote products file');
-//   }
-// });
-
-// fs.writeFile('reviewData.json', JSON.stringify(data.reviewsArray, null, 2), function(err) {
-//   if (err) {
-//     console.log(err);
-//   } else {
-//     console.log('Successfully wrote reviews file');
-//   }
-// })
 // products.forEach((product) => {
 //   Product.create(product)
 //   .then(() => {
