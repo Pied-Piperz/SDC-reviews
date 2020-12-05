@@ -8,7 +8,7 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "seed": "node seed.js",
+    "localPsqlSeed": "psql -U jonathanlim -d sdc -a -f ./postgres/postgresSeed.sql",
     "start": "nodemon server/index.js",
     "build": "webpack -w"
   },

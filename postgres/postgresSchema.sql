@@ -5,13 +5,13 @@ DROP TABLE IF EXISTS products;
 
 CREATE TABLE products (
   id INT,
-  product VARCHAR(40)
+  product VARCHAR(255)
 );
 
 DROP TABLE IF EXISTS reviews;
 
 CREATE TABLE reviews (
-  id SERIAL,
+  id SERIAL PRIMARY KEY,
   username VARCHAR(20),
   text varchar(255),
   dateCreated DATE,
@@ -25,6 +25,8 @@ CREATE TABLE reviews (
   recommended BOOLEAN,
   product_id INT
 );
+
+DROP SEQUENCE IF EXISTS reviews_sequence;
 
 CREATE SEQUENCE reviews_sequence
 START 1
