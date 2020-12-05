@@ -1,0 +1,6 @@
+{
+  "host": "localhost",
+  "user": "jonathanlim",
+  "db": "sdc",
+  "port": 5432
+}
