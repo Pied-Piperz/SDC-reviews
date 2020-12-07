@@ -1,7 +1,7 @@
-const pool = require('./');
+const pool = require('./index.js');
 
 const model = {
-  getRange = (start, end, callback) => {
+  getRange: (start, end, callback) => {
     return pool.query(`SELECT * FROM products, reviews WHERE products.id = reviews.product_id AND products.id > ${start} AND products.id < ${end};`, (err, results) => {
       if (err) {
         callback(err);
@@ -9,8 +9,8 @@ const model = {
       callback(null, results);
     })
   },
-  getOne = (id, callback) => {
-    return pool.query(`SELECT * FROM products, reviews WHERE products.id = reviews.product_id AND product.id = ${id}`, (err, results) => {
+  getOne: (id, callback) => {
+    return pool.query(`SELECT * FROM products, reviews WHERE products.id = reviews.product_id AND products.id = ${id}`, (err, results) => {
       if (err) {
         callback(err);
       }
