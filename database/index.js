@@ -11,14 +11,7 @@ mongoose.connect('mongodb://localhost/reviews', { useNewUrlParser: true, useUnif
 
 const productSchema = new mongoose.Schema({
   product: String,
-  reviews: [{type: mongoose.Schema.ObjectId, ref: 'Reviews'}],
-  ratings: {
-    gameplay: Number,
-    sound: Number,
-    graphics: Number,
-    lastingQuality: Number,
-    recommended: Number
-  }
+  reviews: [{type: mongoose.Schema.ObjectId, ref: 'Reviews'}]
 });
 
 const reviewSchema = new mongoose.Schema({
