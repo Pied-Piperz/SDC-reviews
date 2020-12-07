@@ -1,6 +1,6 @@
 {
-  "host": "localhost",
   "user": "jonathanlim",
-  "db": "sdc",
+  "host": "localhost",
+  "database": "sdc",
   "port": 5432
 }

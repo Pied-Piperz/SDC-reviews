@@ -1,10 +1,12 @@
 DROP DATABASE IF EXISTS SDC;
 CREATE DATABASE SDC;
 
+\c sdc;
+
 DROP TABLE IF EXISTS products;
 
 CREATE TABLE products (
-  id INT,
+  id INT PRIMARY KEY,
   product VARCHAR(255)
 );
 
@@ -23,7 +25,9 @@ CREATE TABLE reviews (
   graphic INT,
   lastingQuality INT,
   recommended BOOLEAN,
-  product_id INT
+  product_id INT,
+  FOREIGN KEY(product_id)
+    REFERENCES products(id) ON DELETE CASCADE
 );
 
 DROP SEQUENCE IF EXISTS reviews_sequence;
