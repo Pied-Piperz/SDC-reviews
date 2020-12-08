@@ -10,7 +10,7 @@ const model = {
     })
   },
   getOne: (id, callback) => {
-    return pool.query(`SELECT * FROM products, reviews WHERE products.id = reviews.product_id AND products.id = ${id}`, (err, results) => {
+    return pool.query(`SELECT * FROM products JOIN reviews USING(product_id) WHERE product_id = ${id}`, (err, results) => {
       if (err) {
         callback(err);
       }
