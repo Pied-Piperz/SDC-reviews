@@ -30,7 +30,7 @@ export default class App extends React.Component {
 
 
   getReviews() {
-    return axios.get('api/products')
+    return axios.get('api/one/10000000')
     .then((product) => {
       console.log(product);
       this.setState({
