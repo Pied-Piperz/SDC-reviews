@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
 
-mongoose.connect('mongodb://localhost/reviews', { useNewUrlParser: true, useUnifiedTopology: true } )
+mongoose.connect('mongodb://localhost/producttest', { useNewUrlParser: true, useUnifiedTopology: true } )
 .then(() => {
   console.log('connected to mongo');
 })

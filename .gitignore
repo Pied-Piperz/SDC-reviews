@@ -354,3 +354,4 @@ reviewData.json
 productData.csv
 reviewData.csv
 postgres/config.json
+newrelic.js
