@@ -355,3 +355,4 @@ productData.csv
 reviewData.csv
 postgres/config.json
 newrelic.js
+sdc.pem

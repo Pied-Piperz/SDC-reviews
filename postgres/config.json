@@ -1,6 +1,7 @@
 {
-  "user": "jonathanlim",
+  "user": "postgres",
   "host": "localhost",
+  "password": "password",
   "database": "sdc",
   "port": 5432
 }
