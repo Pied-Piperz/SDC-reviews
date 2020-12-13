@@ -14,7 +14,7 @@ server.use(cors());
 server.use('/api', router);
 
 // To verify for loader.io testing:
-server.get('loaderio-2d07c630a474e5a0d5dcd06f0c873887', (req, res) => { res.status(200).send('loaderio-2d07c630a474e5a0d5dcd06f0c873887'); });
+server.get('/loaderio-2d07c630a474e5a0d5dcd06f0c873887', (req, res) => { res.status(200).send('loaderio-2d07c630a474e5a0d5dcd06f0c873887'); });
 
 server.use(express.static(path.join(__dirname, '../client/dist')));
 
