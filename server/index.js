@@ -8,9 +8,30 @@ const router = require('./router.js');
 const port = 3000;
 const path = require('path');
 
+const redis = require('redis');
+const redisPort = 6379;
+const redisClient = redis.createClient(redisPort);
+
 server.use(bodyparser.json());
 server.use(bodyparser.urlencoded({extended: true}));
+server.use(morgan('dev'));
 server.use(cors());
+
+const checkCache = (req, res, next) => {
+  const id = req.params.id;
+  redisClient.get(id, (err, data) => {
+    if (err) {
+      console.log(err);
+      res.status(500).send(err);
+    }
+    if (data != null) {
+      res.send(data);
+    } else {
+      next();
+    }
+  });
+};
+
 server.use('/api', router);
 
 // To verify for loader.io testing:
@@ -21,4 +42,3 @@ server.use(express.static(path.join(__dirname, '../client/dist')));
 server.listen(port, () => {
   console.log('connected to server and listening on port 3000');
 });
-

@@ -1,4 +1,6 @@
 const model = require('./model.js');
+const redis = require('redis');
+const redisClient = redis.createClient(6379);
 
 const controllers = {
   getRange: (req, res) => {
@@ -15,6 +17,7 @@ const controllers = {
       if (err) {
         res.status(400).send(err);
       } else {
+        redisClient.setex(req.params.id, 3600, JSON.stringify(results.rows[0]));
         res.status(200).send(results.rows[0]);
       }
     })
